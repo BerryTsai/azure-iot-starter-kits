@@ -2,7 +2,6 @@
 
 import sys
 import os
-import smbus2
 import bme280
 import json
 import requests
@@ -12,7 +11,7 @@ import time
 import devicecheck
 import hubmanager
 from bme280sensor import BME280Sensor
-from iothub_client import IoTHubClient, IoTHubMessage
+from iothub_client import IoTHubModuleClient, IoTHubMessage
 
 
 BME280_SEND_ENABLED = True
@@ -69,7 +68,7 @@ if __name__ == '__main__':
 
     # Create the IoT Edge connection.
     hub = hubmanager.HubManager()
-    hub.client.set_device_twin_callback(device_twin_callback, 0)
+    hub.client.set_module_twin_callback(device_twin_callback, 0)
 
     # Start streaming sensor data.
     stream_sensor_data(hub.client, bme280_sensor)
